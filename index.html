@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MethodistXR Lab — Media Pembelajaran Imersif STMIK Methodist Binjai</title>
+  <title>MethodistXR Studio Pro — Laboratorium Virtual & GenAI STMIK Methodist Binjai</title>
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
 
-  <!-- Three.js & OrbitControls untuk Simulasi 3D/VR -->
+  <!-- Three.js & OrbitControls -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
 
@@ -19,18 +19,19 @@
 
   <style>
     :root {
-      /* Identitas Warna Akademik STMIK Methodist Binjai: Navy Blue, Crimson Red & Academic Gold */
-      --bg-deep: #060b19;
-      --bg-surface: #0f172a;
-      --bg-elevated: #1e293b;
+      --bg-deep: #050914;
+      --bg-surface: #0c1427;
+      --bg-elevated: #16213e;
+      --bg-card: #1e293b;
       --methodist-navy: #1e3a8a;
       --methodist-crimson: #dc2626;
       --methodist-gold: #f59e0b;
-      --methodist-gold-light: #fcd34d;
+      --methodist-gold-light: #fde68a;
       --accent-cyan: #06b6d4;
+      --accent-emerald: #10b981;
       --text-primary: #f8fafc;
       --text-secondary: #94a3b8;
-      --border-gold: rgba(245, 158, 11, 0.32);
+      --border-gold: rgba(245, 158, 11, 0.35);
       --border-subtle: rgba(148, 163, 184, 0.16);
     }
 
@@ -50,14 +51,14 @@
       overflow-x: hidden;
     }
 
-    /* Ornamen Geometris Gorga & Ulos Sumut di Top Bar */
+    /* Pita Identitas Resmi STMIK Methodist Binjai */
     .institutional-ribbon {
       background: linear-gradient(90deg, #7f1d1d 0%, #1e3a8a 50%, #7f1d1d 100%);
       border-bottom: 1px solid var(--methodist-gold);
-      padding: 0.4rem 2rem;
-      font-size: 0.75rem;
+      padding: 0.42rem 2rem;
+      font-size: 0.74rem;
       font-weight: 600;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.03em;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -67,15 +68,15 @@
     }
 
     header {
-      background: linear-gradient(135deg, #091126 0%, #172554 100%);
+      background: linear-gradient(135deg, #081024 0%, #172554 100%);
       border-bottom: 2px solid var(--methodist-gold);
-      padding: 1rem 2rem;
+      padding: 0.95rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
       gap: 1rem;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     }
 
     .brand {
@@ -84,10 +85,9 @@
       gap: 1rem;
     }
 
-    /* Emblem Perisai STMIK Methodist Binjai */
     .emblem-shield {
-      width: 52px;
-      height: 52px;
+      width: 54px;
+      height: 54px;
       background: linear-gradient(145deg, #1e3a8a, #991b1b);
       border: 2px solid var(--methodist-gold);
       border-radius: 14px;
@@ -95,8 +95,8 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 0 20px rgba(245, 158, 11, 0.35);
-      position: relative;
+      box-shadow: 0 0 22px rgba(245, 158, 11, 0.38);
+      flex-shrink: 0;
     }
 
     .emblem-shield span.cross {
@@ -115,14 +115,14 @@
     }
 
     .brand-info h1 {
-      font-size: 1.22rem;
+      font-size: 1.24rem;
       font-weight: 800;
       color: #fff;
       letter-spacing: -0.01em;
     }
 
     .brand-info .campus-name {
-      font-size: 0.85rem;
+      font-size: 0.84rem;
       font-weight: 700;
       color: var(--methodist-gold-light);
       display: block;
@@ -132,56 +132,77 @@
       font-size: 0.72rem;
       color: #cbd5e1;
       display: block;
-      margin-top: 1px;
+      margin-top: 2px;
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-wrap: wrap;
     }
 
     .xr-toolbar {
       display: flex;
-      background: rgba(6, 11, 25, 0.85);
+      background: rgba(5, 9, 20, 0.88);
       padding: 0.35rem;
       border-radius: 12px;
       border: 1px solid var(--border-gold);
-      gap: 0.35rem;
+      gap: 0.3rem;
       flex-wrap: wrap;
     }
 
     .xr-btn {
-      padding: 0.55rem 0.95rem;
+      padding: 0.5rem 0.9rem;
       border: none;
       border-radius: 9px;
       background: transparent;
       color: var(--text-secondary);
       font-weight: 600;
-      font-size: 0.8rem;
+      font-size: 0.79rem;
       cursor: pointer;
       transition: all 0.2s ease;
     }
 
     .xr-btn:hover {
       color: #fff;
-      background: rgba(255, 255, 255, 0.06);
+      background: rgba(255, 255, 255, 0.07);
     }
 
     .xr-btn.active {
       background: linear-gradient(135deg, var(--methodist-gold), #d97706);
-      color: #091126;
-      font-weight: 700;
-      box-shadow: 0 2px 12px rgba(245, 158, 11, 0.4);
+      color: #050914;
+      font-weight: 800;
+      box-shadow: 0 2px 12px rgba(245, 158, 11, 0.42);
     }
 
-    /* Grid Layout Utama */
+    .student-badge-btn {
+      background: rgba(16, 185, 129, 0.16);
+      border: 1px solid rgba(16, 185, 129, 0.45);
+      color: #6ee7b7;
+      padding: 0.52rem 0.9rem;
+      border-radius: 10px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    /* Grid Utama */
     .workspace {
       display: grid;
-      grid-template-columns: 1.5fr 1fr;
+      grid-template-columns: 1.52fr 1fr;
       gap: 1.25rem;
-      padding: 1.25rem 2rem;
-      max-width: 1560px;
+      padding: 1.2rem 2rem;
+      max-width: 1600px;
       width: 100%;
       margin: 0 auto;
       flex: 1;
     }
 
-    @media (max-width: 1100px) {
+    @media (max-width: 1120px) {
       .workspace {
         grid-template-columns: 1fr;
         padding: 1rem;
@@ -197,12 +218,12 @@
       flex-direction: column;
       overflow: hidden;
       position: relative;
-      min-height: 590px;
+      min-height: 620px;
     }
 
     .stage-topbar {
       padding: 0.85rem 1.2rem;
-      background: rgba(6, 11, 25, 0.75);
+      background: rgba(5, 9, 20, 0.8);
       border-bottom: 1px solid var(--border-subtle);
       display: flex;
       justify-content: space-between;
@@ -212,46 +233,51 @@
     }
 
     .course-select {
-      background: var(--bg-elevated);
+      background: var(--bg-card);
       color: #fff;
       border: 1px solid var(--methodist-gold);
       padding: 0.48rem 0.85rem;
       border-radius: 9px;
-      font-size: 0.82rem;
+      font-size: 0.81rem;
       font-weight: 600;
       cursor: pointer;
       max-width: 100%;
     }
 
     .sumut-badge {
-      background: linear-gradient(90deg, rgba(220, 38, 38, 0.2), rgba(245, 158, 11, 0.2));
+      background: linear-gradient(90deg, rgba(220, 38, 38, 0.22), rgba(245, 158, 11, 0.22));
       border: 1px solid rgba(245, 158, 11, 0.45);
       color: #fde68a;
       padding: 0.32rem 0.78rem;
       border-radius: 999px;
-      font-size: 0.74rem;
+      font-size: 0.73rem;
       font-weight: 600;
     }
 
     #canvas-3d {
       flex: 1;
       width: 100%;
-      min-height: 420px;
+      min-height: 410px;
       position: relative;
-      background: radial-gradient(circle at center, #172554 0%, #050811 100%);
+      background: radial-gradient(circle at center, #172554 0%, #040711 100%);
+      cursor: grab;
     }
 
-    /* Telemetri Real-Time Overlay */
+    #canvas-3d:active {
+      cursor: grabbing;
+    }
+
+    /* Telemetri & Inspeksi Komponen HUD */
     .telemetry-hud {
       position: absolute;
-      top: 66px;
+      top: 64px;
       left: 16px;
-      background: rgba(6, 11, 25, 0.82);
+      background: rgba(5, 9, 20, 0.84);
       backdrop-filter: blur(10px);
       border: 1px solid var(--border-gold);
       border-radius: 12px;
-      padding: 0.8rem 1rem;
-      max-width: 310px;
+      padding: 0.85rem 1rem;
+      max-width: 325px;
       pointer-events: none;
     }
 
@@ -269,13 +295,53 @@
 
     .metric-strip {
       display: flex;
-      gap: 0.5rem;
+      gap: 0.45rem;
       margin-top: 0.55rem;
       padding-top: 0.5rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.7rem;
+      font-size: 0.69rem;
       color: var(--accent-cyan);
+      flex-wrap: wrap;
+    }
+
+    /* Grafik Sinyal / Throughput Mini Canvas */
+    .oscilloscope-box {
+      position: absolute;
+      top: 64px;
+      right: 16px;
+      background: rgba(5, 9, 20, 0.84);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(6, 182, 212, 0.4);
+      border-radius: 10px;
+      padding: 0.55rem 0.7rem;
+      width: 185px;
+      pointer-events: none;
+    }
+
+    .oscilloscope-box span {
+      display: block;
+      font-size: 0.66rem;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--accent-cyan);
+      margin-bottom: 0.3rem;
+    }
+
+    /* Tooltip Komponen 3D Saat Diklik */
+    .node-inspector {
+      position: absolute;
+      bottom: 138px;
+      left: 16px;
+      background: rgba(30, 58, 138, 0.92);
+      border: 1px solid var(--methodist-gold);
+      border-radius: 10px;
+      padding: 0.6rem 0.9rem;
+      font-size: 0.75rem;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
     }
 
     /* WebAR Container */
@@ -286,7 +352,7 @@
       align-items: center;
       justify-content: center;
       padding: 1.5rem;
-      background: radial-gradient(circle at center, #1e1b4b 0%, #050811 100%);
+      background: radial-gradient(circle at center, #1e1b4b 0%, #040711 100%);
     }
 
     model-viewer {
@@ -310,21 +376,22 @@
     /* Panel Kontrol Laboratorium */
     .lab-controls {
       padding: 0.9rem 1.2rem;
-      background: rgba(6, 11, 25, 0.92);
+      background: rgba(5, 9, 20, 0.94);
       border-top: 1px solid var(--border-subtle);
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(165px, 1fr));
-      gap: 0.9rem;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 0.85rem;
+      align-items: center;
     }
 
     .ctrl-box {
       display: flex;
       flex-direction: column;
-      gap: 0.3rem;
+      gap: 0.28rem;
     }
 
     .ctrl-box label {
-      font-size: 0.74rem;
+      font-size: 0.73rem;
       color: var(--text-secondary);
       font-weight: 600;
       display: flex;
@@ -341,7 +408,30 @@
       cursor: pointer;
     }
 
-    /* Panel Kanan: MethodistAI Socratic Mentor */
+    .preset-btns {
+      display: flex;
+      gap: 0.4rem;
+      flex-wrap: wrap;
+    }
+
+    .mini-action-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-gold);
+      color: #fde68a;
+      padding: 0.42rem 0.65rem;
+      border-radius: 8px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .mini-action-btn:hover {
+      background: var(--methodist-gold);
+      color: #050914;
+    }
+
+    /* Panel Kanan: MethodistAI Socratic Mentor + Tab Kuis & Log */
     .ai-mentor-card {
       background: var(--bg-surface);
       border: 1px solid var(--border-gold);
@@ -349,20 +439,21 @@
       display: flex;
       flex-direction: column;
       overflow: hidden;
-      min-height: 590px;
+      min-height: 620px;
     }
 
     .ai-topbar {
-      padding: 0.95rem 1.2rem;
-      background: linear-gradient(90deg, rgba(30, 58, 138, 0.45), rgba(220, 38, 38, 0.22));
+      padding: 0.85rem 1.15rem;
+      background: linear-gradient(90deg, rgba(30, 58, 138, 0.5), rgba(220, 38, 38, 0.25));
       border-bottom: 1px solid var(--border-subtle);
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 0.5rem;
     }
 
     .ai-topbar h2 {
-      font-size: 0.96rem;
+      font-size: 0.94rem;
       font-weight: 700;
       display: flex;
       align-items: center;
@@ -377,22 +468,53 @@
       box-shadow: 0 0 8px #22c55e;
     }
 
+    .right-tabs {
+      display: flex;
+      background: rgba(5, 9, 20, 0.75);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .rtab {
+      flex: 1;
+      padding: 0.6rem;
+      border: none;
+      background: transparent;
+      color: var(--text-secondary);
+      font-size: 0.77rem;
+      font-weight: 700;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+    }
+
+    .rtab.active {
+      color: var(--methodist-gold-light);
+      border-bottom-color: var(--methodist-gold);
+      background: rgba(245, 158, 11, 0.08);
+    }
+
+    /* Tab 1: Chat Stream */
+    #panel-chat {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
     .chat-stream {
       flex: 1;
-      padding: 1.1rem;
+      padding: 1rem;
       overflow-y: auto;
       display: flex;
       flex-direction: column;
-      gap: 0.85rem;
-      max-height: 380px;
+      gap: 0.8rem;
+      max-height: 390px;
     }
 
     .bubble {
-      padding: 0.85rem 1rem;
+      padding: 0.82rem 0.98rem;
       border-radius: 12px;
-      font-size: 0.84rem;
+      font-size: 0.83rem;
       line-height: 1.55;
-      max-width: 93%;
+      max-width: 94%;
       animation: slideUp 0.22s ease;
     }
 
@@ -402,7 +524,7 @@
     }
 
     .bubble.ai {
-      background: var(--bg-elevated);
+      background: var(--bg-card);
       border-left: 3px solid var(--methodist-gold);
       align-self: flex-start;
       color: #f1f5f9;
@@ -421,42 +543,42 @@
 
     .bubble code {
       font-family: 'JetBrains Mono', monospace;
-      background: rgba(6, 11, 25, 0.7);
+      background: rgba(5, 9, 20, 0.75);
       padding: 0.12rem 0.35rem;
       border-radius: 4px;
-      font-size: 0.78rem;
+      font-size: 0.77rem;
       color: var(--accent-cyan);
     }
 
     .prompt-suggestions {
-      padding: 0.65rem 1.1rem;
+      padding: 0.6rem 1rem;
       display: flex;
-      gap: 0.45rem;
+      gap: 0.4rem;
       flex-wrap: wrap;
       border-top: 1px solid var(--border-subtle);
-      background: rgba(6, 11, 25, 0.45);
+      background: rgba(5, 9, 20, 0.45);
     }
 
     .suggest-chip {
       background: rgba(245, 158, 11, 0.12);
       border: 1px solid rgba(245, 158, 11, 0.38);
       color: var(--methodist-gold-light);
-      padding: 0.34rem 0.72rem;
+      padding: 0.32rem 0.68rem;
       border-radius: 999px;
-      font-size: 0.73rem;
+      font-size: 0.72rem;
       font-weight: 600;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: 0.2s;
     }
 
     .suggest-chip:hover {
       background: var(--methodist-gold);
-      color: #060b19;
+      color: #050914;
     }
 
     .chat-composer {
-      padding: 0.85rem 1.1rem;
-      background: rgba(6, 11, 25, 0.92);
+      padding: 0.8rem 1rem;
+      background: rgba(5, 9, 20, 0.94);
       border-top: 1px solid var(--border-subtle);
       display: flex;
       gap: 0.5rem;
@@ -464,12 +586,12 @@
 
     .chat-composer input {
       flex: 1;
-      background: var(--bg-elevated);
+      background: var(--bg-card);
       border: 1px solid rgba(255, 255, 255, 0.15);
       border-radius: 10px;
-      padding: 0.65rem 0.9rem;
+      padding: 0.62rem 0.88rem;
       color: #fff;
-      font-size: 0.84rem;
+      font-size: 0.83rem;
       outline: none;
     }
 
@@ -479,28 +601,125 @@
 
     .btn-submit {
       background: linear-gradient(135deg, var(--methodist-gold), #d97706);
-      color: #060b19;
+      color: #050914;
       border: none;
       border-radius: 10px;
-      padding: 0 1.15rem;
+      padding: 0 1.1rem;
       font-weight: 800;
-      font-size: 0.84rem;
+      font-size: 0.83rem;
       cursor: pointer;
     }
 
-    /* Footer Akademik & Evaluasi OBE STMIK Methodist Binjai */
-    .academic-footer {
-      max-width: 1560px;
+    /* Tab 2: Kuis Evaluasi HOTS Interaktif */
+    #panel-quiz {
+      display: none;
+      flex-direction: column;
+      padding: 1.15rem;
+      gap: 0.9rem;
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    .quiz-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 0.95rem;
+    }
+
+    .quiz-card h4 {
+      font-size: 0.84rem;
+      color: var(--methodist-gold-light);
+      margin-bottom: 0.55rem;
+    }
+
+    .quiz-option {
+      display: block;
       width: 100%;
-      margin: 0 auto 1.5rem auto;
+      text-align: left;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(148, 163, 184, 0.25);
+      color: #e2e8f0;
+      padding: 0.55rem 0.8rem;
+      border-radius: 8px;
+      font-size: 0.79rem;
+      margin-bottom: 0.45rem;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .quiz-option:hover {
+      border-color: var(--methodist-gold);
+    }
+
+    .quiz-option.correct {
+      background: rgba(16, 185, 129, 0.22);
+      border-color: #10b981;
+      color: #6ee7b7;
+      font-weight: 600;
+    }
+
+    .quiz-option.wrong {
+      background: rgba(220, 38, 38, 0.22);
+      border-color: #ef4444;
+      color: #fca5a5;
+    }
+
+    /* Tab 3: Laporan Praktikum & Export */
+    #panel-report {
+      display: none;
+      flex-direction: column;
+      padding: 1.15rem;
+      gap: 0.85rem;
+      flex: 1;
+    }
+
+    .report-field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+    }
+
+    .report-field label {
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+
+    .report-field input, .report-field textarea {
+      background: var(--bg-card);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 8px;
+      padding: 0.55rem 0.75rem;
+      color: #fff;
+      font-size: 0.8rem;
+    }
+
+    .export-btn {
+      background: linear-gradient(135deg, var(--accent-emerald), #059669);
+      color: #fff;
+      border: none;
+      padding: 0.7rem 1rem;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.82rem;
+      cursor: pointer;
+      margin-top: 0.3rem;
+    }
+
+    /* Footer Akademik & Evaluasi OBE */
+    .academic-footer {
+      max-width: 1600px;
+      width: 100%;
+      margin: 0 auto 1.25rem auto;
       padding: 0 2rem;
     }
 
     .obe-panel {
-      background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 58, 138, 0.3));
+      background: linear-gradient(135deg, rgba(12, 20, 39, 0.96), rgba(30, 58, 138, 0.32));
       border: 1px solid var(--border-gold);
       border-radius: 14px;
-      padding: 1rem 1.5rem;
+      padding: 0.95rem 1.4rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -509,23 +728,23 @@
     }
 
     .obe-text h3 {
-      font-size: 0.92rem;
+      font-size: 0.9rem;
       color: var(--methodist-gold-light);
-      margin-bottom: 0.25rem;
+      margin-bottom: 0.22rem;
     }
 
     .obe-text p {
-      font-size: 0.8rem;
+      font-size: 0.79rem;
       color: #cbd5e1;
     }
 
     .voice-btn {
-      background: rgba(220, 38, 38, 0.2);
+      background: rgba(220, 38, 38, 0.22);
       border: 1px solid var(--methodist-crimson);
       color: #fecaca;
-      padding: 0.58rem 1.05rem;
+      padding: 0.56rem 1.05rem;
       border-radius: 10px;
-      font-size: 0.8rem;
+      font-size: 0.79rem;
       font-weight: 700;
       cursor: pointer;
     }
@@ -537,10 +756,10 @@
 
     .campus-colophon {
       text-align: center;
-      padding: 0.9rem 1rem;
-      background: #040711;
+      padding: 0.85rem 1rem;
+      background: #03060e;
       border-top: 1px solid var(--border-subtle);
-      font-size: 0.74rem;
+      font-size: 0.73rem;
       color: var(--text-secondary);
     }
 
@@ -560,34 +779,40 @@
   <!-- HEADER UTAMA -->
   <header>
     <div class="brand">
-      <div class="emblem-shield" title="Logo Identitas STMIK Methodist Binjai">
+      <div class="emblem-shield" title="Identitas Resmi STMIK Methodist Binjai">
         <span class="cross">✚</span>
         <span class="code">STMIK-MB</span>
       </div>
       <div class="brand-info">
-        <h1>MethodistXR Lab — Virtual & Augmented Learning</h1>
-        <span class="campus-name">STMIK METHODIST BINJAI • Program Studi Teknik Informatika & Sistem Informasi</span>
-        <span class="campus-sub">Integrasi WebXR (AR/VR), Generative AI Socratic Tutor & Kearifan Lokal Sumatera Utara</span>
+        <h1>MethodistXR Studio Pro — Virtual & Augmented Learning</h1>
+        <span class="campus-name">STMIK METHODIST BINJAI • Program Studi Teknik Informatika (S1) & Sistem Informasi (S1)</span>
+        <span class="campus-sub">Platform Praktikum WebXR (AR/VR), Generative AI Socratic Tutor & Kearifan Lokal Sumatera Utara</span>
       </div>
     </div>
 
-    <div class="xr-toolbar">
-      <button class="xr-btn active" id="tab-vr" onclick="setXRMode('vr')">🥽 Lab 3D / WebVR</button>
-      <button class="xr-btn" id="tab-ar" onclick="setXRMode('ar')">📱 Kamera WebAR</button>
-      <button class="xr-btn" id="tab-stereo" onclick="toggleStereoVR()">👓 VR Cardboard Split</button>
+    <div class="header-actions">
+      <div class="xr-toolbar">
+        <button class="xr-btn active" id="tab-vr" onclick="setXRMode('vr')">🥽 Lab 3D / WebVR</button>
+        <button class="xr-btn" id="tab-ar" onclick="setXRMode('ar')">📱 Kamera WebAR</button>
+        <button class="xr-btn" id="tab-stereo" onclick="toggleStereoVR()">👓 VR Split-Screen</button>
+      </div>
+      <div class="student-badge-btn" title="Skor Kompetensi Mahasiswa">
+        🏆 Skor CPMK: <span id="global-score">0</span>/100
+      </div>
     </div>
   </header>
 
   <!-- WORKSPACE UTAMA -->
   <main class="workspace">
 
-    <!-- PANEL KIRI: SIMULASI INFORMATIKA 3D / VR / AR -->
+    <!-- PANEL KIRI: LABORATORIUM INFORMATIKA 3D / VR / AR -->
     <section class="lab-stage">
       <div class="stage-topbar">
         <select class="course-select" id="course-select" onchange="switchCourseModule()">
           <option value="arch">MK: Arsitektur & Organisasi Komputer — Pipeline CPU & Bus Data 3D</option>
-          <option value="net">MK: Jaringan Komputer — Topologi Mesh & Routing Paket TCP/IP</option>
+          <option value="net">MK: Jaringan Komputer — Topologi Mesh-Star & Routing Paket TCP/IP</option>
           <option value="tree">MK: Struktur Data & Algoritma — Visualisasi Binary Search Tree (BST)</option>
+          <option value="db">MK: Sistem Basis Data — Arsitektur Relasional & Indeks B-Tree 3D</option>
         </select>
         <span class="sumut-badge" id="sumut-wisdom">🧣 Kearifan Lokal: Filosofi Tenun Ulos & Siwaluh Jabu</span>
       </div>
@@ -595,10 +820,22 @@
       <!-- Telemetri Real-Time -->
       <div class="telemetry-hud" id="telemetry-hud">
         <h4 id="hud-heading">Arsitektur Von Neumann & Bus Interkoneksi</h4>
-        <p id="hud-summary">Amati aliran instruksi Fetch–Decode–Execute antara Control Unit, ALU, dan Register. Terinspirasi dari keteraturan benang lungsi dan pakan pada tenun Ulos Batak.</p>
+        <p id="hud-summary">Klik objek 3D untuk menginspeksi komponen. Aliran instruksi Fetch–Decode–Execute dimodelkan selaras dengan keteraturan benang tenun Ulos Batak.</p>
         <div class="metric-strip" id="hud-metrics">
-          <span>CLOCK: 3.2 GHz</span> | <span>IPC: 2.4</span> | <span>LATENCY: 0.31 ns</span>
+          <span>CLOCK: 3.2 GHz</span> | <span>IPC: 2.4</span> | <span>CYCLE: 0.31 ns</span>
         </div>
+      </div>
+
+      <!-- Grafik Osiloskop / Trafik Real-Time -->
+      <div class="oscilloscope-box" id="osc-box">
+        <span id="osc-title">SIGNAL WAVEFORM (GHz)</span>
+        <canvas id="signal-canvas" width="168" height="48"></canvas>
+      </div>
+
+      <!-- Tooltip Inspeksi Objek 3D (Raycasting) -->
+      <div class="node-inspector" id="node-inspector">
+        <span>🔍</span>
+        <span id="inspector-text">Klik komponen 3D mana saja (CPU, Router, atau Simpul Pohon) untuk melihat spesifikasi teknisnya.</span>
       </div>
 
       <!-- Canvas Three.js -->
@@ -621,7 +858,7 @@
           </button>
         </model-viewer>
         <p style="font-size: 0.79rem; color: #cbd5e1; text-align: center; margin-top: 0.85rem; max-width: 500px;">
-          Arahkan kamera smartphone mahasiswa <strong>STMIK Methodist Binjai</strong> ke permukaan meja datar untuk menempatkan model 3D praktikum secara spasial (markerless WebAR).
+          Gunakan kamera smartphone mahasiswa <strong>STMIK Methodist Binjai</strong> untuk memproyeksikan struktur praktikum 3D secara spasial ke permukaan meja belajar.
         </p>
       </div>
 
@@ -650,33 +887,72 @@
           </label>
           <input type="range" id="slider-p3" min="10" max="100" step="10" value="50" oninput="onParamChange()">
         </div>
+
+        <div class="preset-btns">
+          <button class="mini-action-btn" onclick="resetCameraView()">🎥 Reset Kamera</button>
+          <button class="mini-action-btn" onclick="toggleAutoSpin()">🔄 Auto-Rotate</button>
+        </div>
       </div>
     </section>
 
-    <!-- PANEL KANAN: METHODIST-AI TUTOR -->
+    <!-- PANEL KANAN: METHODIST-AI TUTOR, KUIS HOTS & LOG PRAKTIKUM -->
     <aside class="ai-mentor-card">
       <div class="ai-topbar">
-        <h2><span class="live-indicator"></span> MethodistAI — Asisten Dosen Virtual</h2>
-        <span style="font-size: 0.72rem; color: #fde68a; font-weight: 600;">OBE Socratic Engine</span>
+        <h2><span class="live-indicator"></span> MethodistAI — Socratic Learning Engine</h2>
+        <span style="font-size: 0.71rem; color: #fde68a; font-weight: 700;">STMIK-MB AI</span>
       </div>
 
-      <div class="chat-stream" id="chat-stream">
-        <div class="bubble ai">
-          <strong>Horas & Salam Sejahtera Mahasiswa STMIK Methodist Binjai!</strong><br>
-          Saya <strong>MethodistAI</strong>, asisten praktikum cerdas Anda. Saat ini kita membedah <strong>Arsitektur Pipeline CPU & Bus Data</strong>.<br><br>
-          Sebagaimana filosofi <em>Ulos Ragidup</em> yang menyatukan benang lungsi dan pakan secara presisi, <em>Control Unit</em> menyinkronkan sinyal clock agar tidak terjadi <em>data hazard</em>. Coba naikkan <strong>Frekuensi Clock CPU</strong> di panel kiri, lalu jelaskan mengapa peningkatan clock tanpa manajemen pipeline dapat memicu <em>bottleneck</em> memori!
+      <div class="right-tabs">
+        <button class="rtab active" id="rtab-chat" onclick="switchRightTab('chat')">💬 Mentor AI</button>
+        <button class="rtab" id="rtab-quiz" onclick="switchRightTab('quiz')">📝 Kuis HOTS CPMK</button>
+        <button class="rtab" id="rtab-report" onclick="switchRightTab('report')">📄 Bukti Praktikum</button>
+      </div>
+
+      <!-- TAB 1: CHAT MENTOR AI -->
+      <div id="panel-chat">
+        <div class="chat-stream" id="chat-stream">
+          <div class="bubble ai">
+            <strong>Horas & Salam Sejahtera Mahasiswa STMIK Methodist Binjai!</strong><br>
+            Saya <strong>MethodistAI</strong>. Saat ini kita membedah <strong>Arsitektur Pipeline CPU & Bus Data</strong>.<br><br>
+            Sebagaimana tenun <em>Ulos Ragidup</em> menyatukan benang lungsi dan pakan secara harmonis, <em>Control Unit</em> menyinkronkan sinyal clock agar eksekusi instruksi bebas konflik. Coba klik komponen 3D di layar kiri atau naikkan <strong>Frekuensi Clock CPU</strong>, lalu tanyakan analisisnya!
+          </div>
+        </div>
+
+        <div class="prompt-suggestions">
+          <button class="suggest-chip" onclick="triggerPrompt('Analisis telemetri simulasi saat ini')">📊 Analisis Telemetri</button>
+          <button class="suggest-chip" onclick="triggerPrompt('Jelaskan filosofi kearifan lokal Sumatera Utara pada modul ini')">🧣 Kearifan Lokal Sumut</button>
+          <button class="suggest-chip" onclick="triggerPrompt('Beri contoh studi kasus optimasi sistem')">⚙️ Studi Kasus</button>
+        </div>
+
+        <div class="chat-composer">
+          <input type="text" id="chat-input" placeholder="Tulis hipotesis atau pertanyaan praktikum..." onkeypress="if(event.key==='Enter') submitChat()">
+          <button class="btn-submit" onclick="submitChat()">Kirim</button>
         </div>
       </div>
 
-      <div class="prompt-suggestions">
-        <button class="suggest-chip" onclick="triggerPrompt('Analisis telemetri praktikum saat ini')">📊 Analisis Telemetri Live</button>
-        <button class="suggest-chip" onclick="triggerPrompt('Hubungkan materi dengan kearifan lokal Sumatera Utara')">🧣 Filosofi Ulos & Komputasi</button>
-        <button class="suggest-chip" onclick="triggerPrompt('Berikan soal evaluasi HOTS CPMK')">🎓 Uji Kompetensi CPMK</button>
+      <!-- TAB 2: KUIS EVALUASI HOTS -->
+      <div id="panel-quiz">
+        <div id="quiz-container"></div>
       </div>
 
-      <div class="chat-composer">
-        <input type="text" id="chat-input" placeholder="Ketik analisis, kode, atau pertanyaan praktikum..." onkeypress="if(event.key==='Enter') submitChat()">
-        <button class="btn-submit" onclick="submitChat()">Kirim</button>
+      <!-- TAB 3: LOG & UNDUH BUKTI PRAKTIKUM -->
+      <div id="panel-report">
+        <div class="report-field">
+          <label>Nama Lengkap Mahasiswa</label>
+          <input type="text" id="mhs-name" placeholder="Contoh: Budi Santoso">
+        </div>
+        <div class="report-field">
+          <label>NPM (Nomor Pokok Mahasiswa)</label>
+          <input type="text" id="mhs-npm" placeholder="Contoh: 23110045">
+        </div>
+        <div class="report-field">
+          <label>Kesimpulan Eksperimen Praktikum</label>
+          <textarea id="mhs-notes" rows="4" placeholder="Tuliskan hasil pengamatan perubahan parameter pada simulasi 3D/AR..."></textarea>
+        </div>
+        <button class="export-btn" onclick="downloadLabReport()">⬇️ Unduh Lembar Bukti Praktikum (.TXT)</button>
+        <p style="font-size: 0.72rem; color: #94a3b8; line-height: 1.4;">
+          File bukti praktikum mencantumkan identitas mahasiswa STMIK Methodist Binjai, parameter simulasi aktif, dan skor evaluasi HOTS.
+        </p>
       </div>
     </aside>
 
@@ -687,7 +963,7 @@
     <div class="obe-panel">
       <div class="obe-text">
         <h3 id="cpmk-title">🎯 Capaian Pembelajaran Mata Kuliah (CPMK-03): Analisis Kinerja Sistem & Arsitektur</h3>
-        <p id="cpmk-desc">Tugas Mandiri: Simulasikan beban komputasi 90%, aktifkan mode X-Ray, dan validasi perhitungan throughput instruksi bersama MethodistAI.</p>
+        <p id="cpmk-desc">Tugas Mandiri: Simulasikan beban komputasi 90%, klik komponen ALU & Control Unit untuk inspeksi, lalu selesaikan Kuis HOTS CPMK.</p>
       </div>
       <button class="voice-btn" id="btn-voice" onclick="toggleAudioGuide()">🔊 Narasi Audio Praktikum & Budaya</button>
     </div>
@@ -702,11 +978,11 @@
 
   <script>
     // =========================================================
-    // 1. INISIALISASI VIEWPORT 3D / VR (THREE.JS)
+    // 1. INISIALISASI VIEWPORT 3D / VR (THREE.JS + RAYCASTER)
     // =========================================================
     const viewport = document.getElementById('canvas-3d');
     const scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0x050811, 0.032);
+    scene.fog = new THREE.FogExp2(0x040711, 0.03);
 
     const camera = new THREE.PerspectiveCamera(48, viewport.clientWidth / viewport.clientHeight, 0.1, 1000);
     camera.position.set(7.5, 5.5, 8.5);
@@ -719,9 +995,10 @@
     const controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.enableDamping = true;
     controls.dampingFactor = 0.06;
+    controls.autoRotate = false;
+    controls.autoRotateSpeed = 1.4;
 
-    // Pencahayaan Akademik (Biru Navy, Emas & Merah Crimson)
-    scene.add(new THREE.AmbientLight(0xffffff, 0.6));
+    scene.add(new THREE.AmbientLight(0xffffff, 0.65));
 
     const keyLight = new THREE.DirectionalLight(0xfde68a, 1.15);
     keyLight.position.set(8, 12, 7);
@@ -739,14 +1016,36 @@
 
     let activeCourse = 'arch';
     let stereoEnabled = false;
+    let totalScore = 0;
     const clock = new THREE.Clock();
     let animatedPackets = [];
+    let interactiveMeshes = [];
+
+    // Raycaster untuk klik inspeksi komponen 3D
+    const raycaster = new THREE.Raycaster();
+    const mouse = new THREE.Vector2();
+
+    viewport.addEventListener('pointerdown', (event) => {
+      const rect = viewport.getBoundingClientRect();
+      mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+      mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+
+      raycaster.setFromCamera(mouse, camera);
+      const hits = raycaster.intersectObjects(interactiveMeshes);
+      if (hits.length > 0) {
+        const info = hits[0].object.userData.spec;
+        if (info) {
+          document.getElementById('inspector-text').innerHTML = info;
+        }
+      }
+    });
 
     function resetLabGroup() {
       while (labGroup.children.length > 0) {
         labGroup.remove(labGroup.children[0]);
       }
       animatedPackets = [];
+      interactiveMeshes = [];
       labGroup.position.set(0, 0, 0);
       labGroup.rotation.set(0, 0, 0);
     }
@@ -762,36 +1061,38 @@
       const regMat = new THREE.MeshStandardMaterial({ color: 0xf59e0b, metalness: 0.6, roughness: 0.2, wireframe });
       const busMat = new THREE.MeshStandardMaterial({ color: 0x06b6d4, emissive: 0x0891b2, emissiveIntensity: 0.35, wireframe });
 
-      // Motherboard Substrate (Motif Tenunan Bus)
       const board = new THREE.Mesh(new THREE.BoxGeometry(7.2, 0.25, 5.2), boardMat);
       board.position.y = 0.125;
+      board.userData.spec = "<strong>Motherboard Substrate:</strong> Jalur interkoneksi fisik berlapis yang menyalurkan daya dan sinyal sinkronisasi sistem.";
       labGroup.add(board);
+      interactiveMeshes.push(board);
 
-      // Control Unit (CU)
       const cu = new THREE.Mesh(new THREE.BoxGeometry(1.8, 1.1, 1.8), cuMat);
       cu.position.set(-2.1, 0.8, -1.1);
+      cu.userData.spec = "<strong>Control Unit (CU):</strong> Mengatur siklus Fetch–Decode–Execute dan membangkitkan sinyal kendali ke seluruh unit CPU.";
       labGroup.add(cu);
+      interactiveMeshes.push(cu);
 
-      // Arithmetic Logic Unit (ALU)
       const alu = new THREE.Mesh(new THREE.BoxGeometry(1.8, 1.1, 1.8), aluMat);
       alu.position.set(2.1, 0.8, -1.1);
+      alu.userData.spec = "<strong>Arithmetic Logic Unit (ALU):</strong> Mengeksekusi operasi aritmetika biner serta gerbang logika AND, OR, XOR, dan pergeseran bit.";
       labGroup.add(alu);
+      interactiveMeshes.push(alu);
 
-      // Bank Register & Cache L1
       for (let i = 0; i < 4; i++) {
         const reg = new THREE.Mesh(new THREE.BoxGeometry(1.1, 0.65, 0.85), regMat);
         reg.position.set(-2.25 + i * 1.5, 0.58, 1.45);
+        reg.userData.spec = `<strong>Register & L1 Cache #${i + 1}:</strong> Memori berkecepatan ultra-tinggi (akses < 1 ns) untuk menyimpan operand sementara.`;
         labGroup.add(reg);
+        interactiveMeshes.push(reg);
       }
 
-      // Jalur System Bus 3D
       const bus1 = new THREE.Mesh(new THREE.BoxGeometry(4.2, 0.12, 0.28), busMat);
       bus1.position.set(0, 0.35, -1.1);
       const bus2 = new THREE.Mesh(new THREE.BoxGeometry(0.28, 0.12, 2.6), busMat);
       bus2.position.set(0, 0.35, 0.2);
       labGroup.add(bus1, bus2);
 
-      // Pulsa Instruksi Bergerak
       for (let p = 0; p < 6; p++) {
         const pulse = new THREE.Mesh(
           new THREE.SphereGeometry(0.16, 12, 12),
@@ -810,12 +1111,12 @@
       const nodeMat = new THREE.MeshStandardMaterial({ color: 0xdc2626, roughness: 0.4, wireframe });
       const linkMat = new THREE.LineBasicMaterial({ color: 0x38bdf8 });
 
-      // Core Switch Kampus (Pusat Siwaluh Jabu)
       const core = new THREE.Mesh(new THREE.OctahedronGeometry(0.85), coreMat);
       core.position.set(0, 2.2, 0);
+      core.userData.spec = "<strong>Core Switch Layer-3 Kampus:</strong> Tulang punggung routing berkecepatan tinggi dengan redundansi jalur otomatis.";
       labGroup.add(core);
+      interactiveMeshes.push(core);
 
-      // 6 Router Distribusi & Edge Node
       const radius = 3.4;
       for (let i = 0; i < 6; i++) {
         const angle = (i * Math.PI * 2) / 6;
@@ -824,18 +1125,20 @@
 
         const router = new THREE.Mesh(new THREE.CylinderGeometry(0.45, 0.45, 0.4, 16), routerMat);
         router.position.set(x, 1.1, z);
+        router.userData.spec = `<strong>Distribution Router Lab-${i + 1}:</strong> Menangani segmentasi VLAN, subnetting IPv4/IPv6, dan kebijakan QoS.`;
         labGroup.add(router);
+        interactiveMeshes.push(router);
 
         const client = new THREE.Mesh(new THREE.BoxGeometry(0.55, 0.55, 0.55), nodeMat);
         client.position.set(x * 1.45, 0.4, z * 1.45);
+        client.userData.spec = `<strong>Workstation Mahasiswa #${i + 1}:</strong> Endpoint klien TCP/IP pada jaringan laboratorium STMIK Methodist Binjai.`;
         labGroup.add(client);
+        interactiveMeshes.push(client);
 
-        // Garis Koneksi Topologi Mesh-Star
         const pts = [new THREE.Vector3(0, 2.2, 0), new THREE.Vector3(x, 1.1, z), new THREE.Vector3(x * 1.45, 0.4, z * 1.45)];
         const geom = new THREE.BufferGeometry().setFromPoints(pts);
         labGroup.add(new THREE.Line(geom, linkMat));
 
-        // Paket TCP/IP
         const pkt = new THREE.Mesh(new THREE.SphereGeometry(0.14, 10, 10), new THREE.MeshBasicMaterial({ color: 0x22d3ee }));
         pkt.userData = { targetX: x * 1.45, targetZ: z * 1.45, phase: i * 0.9 };
         labGroup.add(pkt);
@@ -851,21 +1154,26 @@
       const edgeMat = new THREE.LineBasicMaterial({ color: 0xfde68a });
 
       const nodes = [
-        { pos: [0, 4.2, 0], mat: rootMat, parent: null },
-        { pos: [-2.1, 2.7, 0], mat: branchMat, parent: [0, 4.2, 0] },
-        { pos: [2.1, 2.7, 0], mat: branchMat, parent: [0, 4.2, 0] },
-        { pos: [-3.1, 1.2, 0.7], mat: leafMat, parent: [-2.1, 2.7, 0] },
-        { pos: [-1.1, 1.2, -0.7], mat: leafMat, parent: [-2.1, 2.7, 0] },
-        { pos: [1.1, 1.2, 0.7], mat: leafMat, parent: [2.1, 2.7, 0] },
-        { pos: [3.1, 1.2, -0.7], mat: leafMat, parent: [2.1, 2.7, 0] }
+        { pos: [0, 4.2, 0], mat: rootMat, parent: null, key: 50, role: "Root Node (Key: 50)" },
+        { pos: [-2.1, 2.7, 0], mat: branchMat, parent: [0, 4.2, 0], key: 30, role: "Left Subtree (Key: 30 < 50)" },
+        { pos: [2.1, 2.7, 0], mat: branchMat, parent: [0, 4.2, 0], key: 70, role: "Right Subtree (Key: 70 > 50)" },
+        { pos: [-3.1, 1.2, 0.7], mat: leafMat, parent: [-2.1, 2.7, 0], key: 20, role: "Leaf Node (Key: 20)" },
+        { pos: [-1.1, 1.2, -0.7], mat: leafMat, parent: [-2.1, 2.7, 0], key: 40, role: "Leaf Node (Key: 40)" },
+        { pos: [1.1, 1.2, 0.7], mat: leafMat, parent: [2.1, 2.7, 0], key: 60, role: "Leaf Node (Key: 60)" },
+        { pos: [3.1, 1.2, -0.7], mat: leafMat, parent: [2.1, 2.7, 0], key: 80, role: "Leaf Node (Key: 80)" }
       ];
 
       nodes.forEach((n, idx) => {
         const sphere = new THREE.Mesh(new THREE.SphereGeometry(0.42, 20, 20), n.mat);
         sphere.position.set(...n.pos);
-        sphere.userData = { baseY: n.pos[1], idx };
+        sphere.userData = {
+          baseY: n.pos[1],
+          idx,
+          spec: `<strong>${n.role}:</strong> Kompleksitas pencarian rata-rata O(log n) dengan kedalaman level ${Math.floor(Math.log2(idx + 1))}.`
+        };
         labGroup.add(sphere);
         animatedPackets.push(sphere);
+        interactiveMeshes.push(sphere);
 
         if (n.parent) {
           const pts = [new THREE.Vector3(...n.parent), new THREE.Vector3(...n.pos)];
@@ -875,43 +1183,170 @@
       });
     }
 
+    function buildDatabaseIndex(wireframe = false) {
+      resetLabGroup();
+      const idxMat = new THREE.MeshStandardMaterial({ color: 0xf59e0b, metalness: 0.5, roughness: 0.25, wireframe });
+      const pageMat = new THREE.MeshStandardMaterial({ color: 0x1e3a8a, roughness: 0.35, wireframe });
+      const diskMat = new THREE.MeshStandardMaterial({ color: 0x10b981, roughness: 0.4, wireframe });
+
+      // B-Tree Index Header
+      const headerBlock = new THREE.Mesh(new THREE.BoxGeometry(3.2, 0.75, 1.4), idxMat);
+      headerBlock.position.set(0, 3.8, 0);
+      headerBlock.userData.spec = "<strong>B+ Tree Root Index Page:</strong> Menyimpan pointer kunci primer untuk mempercepat kueri SELECT tanpa Full Table Scan.";
+      labGroup.add(headerBlock);
+      interactiveMeshes.push(headerBlock);
+
+      // Data Pages & Disk Blocks
+      for (let i = -1; i <= 1; i++) {
+        const page = new THREE.Mesh(new THREE.BoxGeometry(1.8, 0.7, 1.3), pageMat);
+        page.position.set(i * 2.4, 2.1, 0);
+        page.userData.spec = `<strong>Leaf Index Bucket #${i + 2}:</strong> Menyimpan rentang kunci terurut dan alamat blok fisik (RID).`;
+        labGroup.add(page);
+        interactiveMeshes.push(page);
+
+        const disk = new THREE.Mesh(new THREE.CylinderGeometry(0.85, 0.85, 0.55, 24), diskMat);
+        disk.position.set(i * 2.4, 0.5, 0);
+        disk.userData.spec = `<strong>Tablespace Storage Block #${i + 2}:</strong> Penyimpanan persisten baris relasi (tuple) pada SSD/NVMe server basis data.`;
+        labGroup.add(disk);
+        interactiveMeshes.push(disk);
+
+        const line1 = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(0, 3.8, 0), new THREE.Vector3(i * 2.4, 2.1, 0)]);
+        const line2 = new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(i * 2.4, 2.1, 0), new THREE.Vector3(i * 2.4, 0.5, 0)]);
+        labGroup.add(new THREE.Line(line1, new THREE.LineBasicMaterial({ color: 0xfde68a })));
+        labGroup.add(new THREE.Line(line2, new THREE.LineBasicMaterial({ color: 0x34d399 })));
+      }
+    }
+
     buildCpuArchitecture(false);
 
     // =========================================================
-    // 3. MANAJEMEN MODUL KURIKULUM & INTERAKSI
+    // 3. KATALOG MODUL, KUIS HOTS & INTERAKSI
     // =========================================================
     const courseCatalog = {
       arch: {
         wisdom: '🧣 Kearifan Lokal: Filosofi Tenun Ulos & Siwaluh Jabu',
         heading: 'Arsitektur Von Neumann & Bus Interkoneksi',
-        summary: 'Amati aliran instruksi Fetch–Decode–Execute antara Control Unit, ALU, dan Register. Terinspirasi dari keteraturan benang lungsi dan pakan pada tenun Ulos Batak.',
+        summary: 'Klik objek 3D untuk menginspeksi komponen. Aliran instruksi Fetch–Decode–Execute dimodelkan selaras dengan keteraturan benang tenun Ulos Batak.',
         p1Label: 'Frekuensi Clock CPU',
         p1Unit: ' GHz',
+        oscTitle: 'CPU CLOCK PULSE (GHz)',
         cpmkTitle: '🎯 Capaian Pembelajaran Mata Kuliah (CPMK-03): Analisis Kinerja Sistem & Arsitektur',
-        cpmkDesc: 'Tugas Mandiri: Simulasikan beban komputasi 90%, aktifkan mode X-Ray, dan validasi perhitungan throughput instruksi bersama MethodistAI.',
-        aiGreeting: 'Modul beralih ke <strong>Arsitektur & Organisasi Komputer</strong>. Perhatikan aliran pulsa data pada jalur bus. Ubah <em>Frekuensi Clock CPU</em> dan amati perubahan metrik latensi di sudut kiri atas!'
+        cpmkDesc: 'Tugas Mandiri: Simulasikan beban komputasi 90%, klik komponen ALU & Control Unit untuk inspeksi, lalu selesaikan Kuis HOTS CPMK.',
+        aiGreeting: 'Modul beralih ke <strong>Arsitektur & Organisasi Komputer</strong>. Silakan klik blok biru (CU) atau merah (ALU) pada kanvas 3D untuk melihat spesifikasi teknisnya!',
+        quizzes: [
+          {
+            q: '1. Jika frekuensi clock CPU dinaikkan dari 2.0 GHz menjadi 4.0 GHz tanpa mempercepat latensi RAM, fenomena apa yang terjadi pada pipeline?',
+            opts: ['Memory Wall / Pipeline Stall meningkat', 'Kapasitas hard disk bertambah dua kali lipat', 'Jumlah bit alamat berkurang setengahnya'],
+            ans: 0
+          },
+          {
+            q: '2. Unit manakah dalam arsitektur Von Neumann yang bertugas menerjemahkan opcode instruksi menjadi sinyal kendali?',
+            opts: ['Arithmetic Logic Unit (ALU)', 'Control Unit (CU)', 'Program Counter (PC)'],
+            ans: 1
+          }
+        ]
       },
       net: {
         wisdom: '🏛️ Kearifan Lokal: Struktur Komunal Rumah Adat Karo Siwaluh Jabu',
         heading: 'Topologi Hybrid Mesh-Star & Routing Paket',
-        summary: 'Sebagaimana rumah adat Siwaluh Jabu yang menopang 8 keluarga dalam satu sistem koordinasi terpadu tanpa titik lemah tunggal, topologi ini menjamin redundansi paket.',
+        summary: 'Sebagaimana rumah adat Siwaluh Jabu menopang 8 keluarga dalam koordinasi terpadu tanpa titik lemah tunggal, topologi ini menjamin redundansi paket.',
         p1Label: 'Bandwidth Link Utama',
         p1Unit: ' Gbps',
+        oscTitle: 'PACKET THROUGHPUT (Gbps)',
         cpmkTitle: '🎯 Capaian Pembelajaran Mata Kuliah (CPMK-04): Perancangan & Optimasi Jaringan',
-        cpmkDesc: 'Tugas Mandiri: Naikkan trafik jaringan ke 80%, analisis risiko packet loss, dan diskusikan algoritma routing terpendek dengan MethodistAI.',
-        aiGreeting: 'Selamat datang di <strong>Laboratorium Virtual Jaringan Komputer STMIK Methodist Binjai</strong>! Amati bagaimana paket TCP/IP didistribusikan dari Core Switch ke setiap node klien. Apa yang terjadi jika trafik mencapai 90%?'
+        cpmkDesc: 'Tugas Mandiri: Naikkan trafik jaringan ke 80%, inspeksi Core Switch & Router Lab, lalu kerjakan Kuis HOTS CPMK.',
+        aiGreeting: 'Selamat datang di <strong>Lab Virtual Jaringan Komputer STMIK Methodist Binjai</strong>! Klik Core Switch emas di tengah untuk melihat perannya dalam routing kampus.',
+        quizzes: [
+          {
+            q: '1. Apa keunggulan utama topologi hybrid mesh-star dibanding topologi bus murni pada jaringan kampus?',
+            opts: ['Fault tolerance tinggi sehingga putusnya satu kabel klien tidak melumpuhkan jaringan', 'Tidak memerlukan perangkat switch atau router', 'Hanya mendukung komunikasi satu arah (simplex)'],
+            ans: 0
+          },
+          {
+            q: '2. Ketika utilisasi link melampaui 85%, mekanisme TCP apa yang aktif mencegah keruntuhan jaringan?',
+            opts: ['Congestion Avoidance (penurunan Congestion Window)', 'ARP Broadcast Flooding', 'DNS Zone Transfer'],
+            ans: 0
+          }
+        ]
       },
       tree: {
         wisdom: '🌿 Kearifan Lokal: Hierarki Silsilah Dalihan Na Tolu',
         heading: 'Struktur Data Binary Search Tree (BST) 3D',
-        summary: 'Visualisasi simpul induk (Root) dan simpul anak (Left/Right Child) dengan kompleksitas pencarian O(log n), selaras dengan struktur kekerabatan simetris Dalihan Na Tolu.',
-        p1Label: 'Kedalaman / Skala Traversing',
+        summary: 'Visualisasi simpul induk (Root: 50) dan anak (Left < Root < Right) dengan kompleksitas O(log n), selaras dengan keseimbangan tatanan Dalihan Na Tolu.',
+        p1Label: 'Kecepatan Traversing',
         p1Unit: 'x',
+        oscTitle: 'TRAVERSAL DEPTH INDEX',
         cpmkTitle: '🎯 Capaian Pembelajaran Mata Kuliah (CPMK-02): Efisiensi Algoritma & Struktur Data',
-        cpmkDesc: 'Tugas Mandiri: Eksplorasi urutan penelusuran In-Order, Pre-Order, dan Post-Order serta uji analisis kompleksitas waktu bersama MethodistAI.',
-        aiGreeting: 'Anda kini membedah <strong>Binary Search Tree (BST) 3D</strong> pada mata kuliah Struktur Data. Perhatikan relasi antara simpul akar merah dan cabang kuning. Tanyakan simulasi penelusuran pohon atau kuis CPMK!'
+        cpmkDesc: 'Tugas Mandiri: Klik simpul pohon 3D untuk memeriksa kunci datanya dan uji pemahaman penelusuran melalui Kuis HOTS.',
+        aiGreeting: 'Anda membedah <strong>Binary Search Tree (BST) 3D</strong>. Klik simpul merah (Root: 50) atau cabang kuning untuk melihat posisi relasionalnya!',
+        quizzes: [
+          {
+            q: '1. Manakah urutan output In-Order Traversal (Left → Root → Right) dari model BST 3D di layar?',
+            opts: ['20, 30, 40, 50, 60, 70, 80', '50, 30, 20, 40, 70, 60, 80', '20, 40, 30, 60, 80, 70, 50'],
+            ans: 0
+          },
+          {
+            q: '2. Mengapa struktur BST perlu diseimbangkan (AVL / Red-Black Tree)?',
+            opts: ['Mencegah degenerasi menjadi linked-list dengan kompleksitas O(n)', 'Mengubah struktur pohon menjadi graf siklik', 'Menghapus kebutuhan perbandingan kunci'],
+            ans: 0
+          }
+        ]
+      },
+      db: {
+        wisdom: '📜 Kearifan Lokal: Keteraturan Pustaha Laklak Batak',
+        heading: 'Arsitektur Relasional & Indeks B+ Tree 3D',
+        summary: 'Sebagaimana naskah lipat Pustaha Laklak disusun terstruktur agar mudah ditelusuri kembali, indeks B+ Tree mempercepat pencarian tuple jutaan baris.',
+        p1Label: 'Buffer Pool Cache (GB)',
+        p1Unit: ' GB',
+        oscTitle: 'QUERY IOPS RATE (k/s)',
+        cpmkTitle: '🎯 Capaian Pembelajaran Mata Kuliah (CPMK-05): Optimasi Kueri & Manajemen Basis Data',
+        cpmkDesc: 'Tugas Mandiri: Inspeksi blok Root Index & Storage Cylinder pada kanvas 3D lalu selesaikan Kuis HOTS CPMK.',
+        aiGreeting: 'Selamat datang di <strong>Lab Sistem Basis Data STMIK Methodist Binjai</strong>! Klik blok emas di atas untuk memahami cara kerja indeks B+ Tree.',
+        quizzes: [
+          {
+            q: '1. Bagaimana indeks B+ Tree menekan jumlah operasi I/O disk pada tabel berkapasitas 10 juta baris?',
+            opts: ['Memangkas pencarian menjadi beberapa lompatan halaman indeks O(log_B n) tanpa Full Table Scan', 'Menghapus seluruh kunci primer pada tabel', 'Menyimpan seluruh database di dalam register CPU'],
+            ans: 0
+          },
+          {
+            q: '2. Apa tujuan utama normalisasi hingga Bentuk Normal Ketiga (3NF) pada basis data relasional?',
+            opts: ['Menghilangkan ketergantungan transitif dan anomali insert/update/delete', 'Memperbanyak duplikasi kolom teks', 'Menonaktifkan integritas referensial antar tabel'],
+            ans: 0
+          }
+        ]
       }
     };
+
+    function renderQuizPanel() {
+      const container = document.getElementById('quiz-container');
+      const items = courseCatalog[activeCourse].quizzes;
+      container.innerHTML = items.map((item, qIdx) => `
+        <div class="quiz-card">
+          <h4>${item.q}</h4>
+          ${item.opts.map((opt, oIdx) => `
+            <button class="quiz-option" onclick="checkQuizAnswer(this, ${qIdx}, ${oIdx})">${String.fromCharCode(65 + oIdx)}. ${opt}</button>
+          `).join('')}
+        </div>
+      `).join('');
+    }
+
+    function checkQuizAnswer(btn, qIdx, oIdx) {
+      const correctIdx = courseCatalog[activeCourse].quizzes[qIdx].ans;
+      const parent = btn.parentElement;
+      const buttons = parent.querySelectorAll('.quiz-option');
+      buttons.forEach(b => b.disabled = true);
+
+      if (oIdx === correctIdx) {
+        btn.classList.add('correct');
+        totalScore = Math.min(100, totalScore + 25);
+        document.getElementById('global-score').textContent = totalScore;
+      } else {
+        btn.classList.add('wrong');
+        buttons[correctIdx].classList.add('correct');
+      }
+    }
+
+    renderQuizPanel();
 
     function switchCourseModule() {
       activeCourse = document.getElementById('course-select').value;
@@ -922,13 +1357,16 @@
       document.getElementById('hud-heading').textContent = info.heading;
       document.getElementById('hud-summary').textContent = info.summary;
       document.getElementById('lbl-p1').textContent = info.p1Label;
+      document.getElementById('osc-title').textContent = info.oscTitle;
       document.getElementById('cpmk-title').textContent = info.cpmkTitle;
       document.getElementById('cpmk-desc').textContent = info.cpmkDesc;
 
       if (activeCourse === 'arch') buildCpuArchitecture(xray);
       if (activeCourse === 'net') buildNetworkTopology(xray);
       if (activeCourse === 'tree') buildBinaryTree(xray);
+      if (activeCourse === 'db') buildDatabaseIndex(xray);
 
+      renderQuizPanel();
       onParamChange();
       pushChatBubble('ai', info.aiGreeting);
     }
@@ -943,7 +1381,6 @@
       document.getElementById('val-p2').textContent = p2 ? 'X-Ray' : 'Solid';
       document.getElementById('val-p3').textContent = p3 + '%';
 
-      // Update metrik telemetri HUD
       const metricsEl = document.getElementById('hud-metrics');
       if (activeCourse === 'arch') {
         const latency = (1 / p1).toFixed(2);
@@ -955,9 +1392,13 @@
         const loss = p3 > 75 ? ((p3 - 75) * 0.18).toFixed(1) : '0.0';
         metricsEl.innerHTML = `<span>BW: ${throughput} Gbps</span> | <span>LOAD: ${p3}%</span> | <span>LOSS: ${loss}%</span>`;
         buildNetworkTopology(p2);
-      } else {
+      } else if (activeCourse === 'tree') {
         metricsEl.innerHTML = `<span>NODES: 7</span> | <span>HEIGHT: 3</span> | <span>TIME: O(log n)</span>`;
         buildBinaryTree(p2);
+      } else {
+        const iops = Math.round(p1 * 18 * (1 - p3 / 220));
+        metricsEl.innerHTML = `<span>CACHE: ${p1.toFixed(1)} GB</span> | <span>IOPS: ${iops}k/s</span> | <span>HIT: ${(99.4 - p3 * 0.04).toFixed(1)}%</span>`;
+        buildDatabaseIndex(p2);
       }
     }
 
@@ -965,16 +1406,13 @@
       document.getElementById('tab-vr').classList.toggle('active', mode === 'vr');
       document.getElementById('tab-ar').classList.toggle('active', mode === 'ar');
 
-      if (mode === 'vr') {
-        document.getElementById('canvas-3d').style.display = 'block';
-        document.getElementById('telemetry-hud').style.display = 'block';
-        document.getElementById('ar-stage').style.display = 'none';
-        handleResize();
-      } else {
-        document.getElementById('canvas-3d').style.display = 'none';
-        document.getElementById('telemetry-hud').style.display = 'none';
-        document.getElementById('ar-stage').style.display = 'flex';
-      }
+      const showVR = mode === 'vr';
+      document.getElementById('canvas-3d').style.display = showVR ? 'block' : 'none';
+      document.getElementById('telemetry-hud').style.display = showVR ? 'block' : 'none';
+      document.getElementById('osc-box').style.display = showVR ? 'block' : 'none';
+      document.getElementById('node-inspector').style.display = showVR ? 'flex' : 'none';
+      document.getElementById('ar-stage').style.display = showVR ? 'none' : 'flex';
+      if (showVR) handleResize();
     }
 
     function toggleStereoVR() {
@@ -986,13 +1424,53 @@
       }
     }
 
+    function resetCameraView() {
+      camera.position.set(7.5, 5.5, 8.5);
+      controls.target.set(0, 1.2, 0);
+      controls.update();
+    }
+
+    function toggleAutoSpin() {
+      controls.autoRotate = !controls.autoRotate;
+    }
+
+    function switchRightTab(tabName) {
+      ['chat', 'quiz', 'report'].forEach(t => {
+        document.getElementById(`rtab-${t}`).classList.toggle('active', t === tabName);
+        document.getElementById(`panel-${t}`).style.display = (t === tabName) ? 'flex' : 'none';
+      });
+    }
+
     // =========================================================
-    // 4. LOOP ANIMASI REAL-TIME
+    // 4. LOOP ANIMASI REAL-TIME & OSILOSKOP SINYAL
     // =========================================================
+    const oscCanvas = document.getElementById('signal-canvas');
+    const oscCtx = oscCanvas.getContext('2d');
+
+    function drawSignalWave(t, freq, load) {
+      const w = oscCanvas.width;
+      const h = oscCanvas.height;
+      oscCtx.clearRect(0, 0, w, h);
+      oscCtx.strokeStyle = '#06b6d4';
+      oscCtx.lineWidth = 1.8;
+      oscCtx.beginPath();
+      for (let x = 0; x < w; x++) {
+        const amp = (h * 0.32) * (load / 100);
+        const y = h / 2 + Math.sin((x * 0.08 * freq) + t * 6) * amp;
+        if (x === 0) oscCtx.moveTo(x, y);
+        else oscCtx.lineTo(x, y);
+      }
+      oscCtx.stroke();
+    }
+
     function renderLoop() {
       requestAnimationFrame(renderLoop);
       const elapsed = clock.getElapsedTime();
-      const speedFactor = parseFloat(document.getElementById('slider-p1').value) * 0.65;
+      const p1 = parseFloat(document.getElementById('slider-p1').value);
+      const p3 = parseInt(document.getElementById('slider-p3').value, 10);
+      const speedFactor = p1 * 0.65;
+
+      drawSignalWave(elapsed, p1, p3);
 
       if (activeCourse === 'arch') {
         animatedPackets.forEach(p => {
@@ -1013,7 +1491,6 @@
           );
         });
       } else if (activeCourse === 'tree') {
-        labGroup.rotation.y = Math.sin(elapsed * 0.4) * 0.25;
         animatedPackets.forEach(node => {
           node.position.y = node.userData.baseY + Math.sin(elapsed * speedFactor + node.userData.idx) * 0.08;
         });
@@ -1077,57 +1554,87 @@
       setTimeout(() => {
         const answer = buildMethodistAIResponse(raw.toLowerCase(), activeCourse, p1, p3);
         pushChatBubble('ai', answer);
-      }, 420);
+      }, 380);
     }
 
     function buildMethodistAIResponse(q, course, p1, load) {
       if (course === 'arch') {
         if (q.includes('telemetri') || q.includes('analisis')) {
-          return `<strong>Analisis Telemetri CPU (Clock ${p1.toFixed(1)} GHz | Beban ${load}%):</strong><br>Waktu siklus clock saat ini adalah <code>T = 1/f = ${(1/p1).toFixed(2)} ns</code>. ${load >= 80 ? '⚠️ Pada beban ' + load + '%, antrean instruksi di ALU mengalami saturasi sehingga menurunkan <em>Instructions Per Cycle (IPC)</em>.' : 'Aliran instruksi antar register berjalan seimbang tanpa stall pipeline.'}<br><br>Menurut Anda, komponen memori mana yang paling krusial diperbesar kapasitasnya untuk menahan lonjakan beban ini?`;
+          return `<strong>Analisis Telemetri CPU (Clock ${p1.toFixed(1)} GHz | Beban ${load}%):</strong><br>Periode siklus clock saat ini <code>T = 1/f = ${(1/p1).toFixed(2)} ns</code>. ${load >= 80 ? '⚠️ Beban tinggi menyebabkan antrean di unit eksekusi ALU meningkat sehingga menurunkan IPC efektif.' : 'Sinkronisasi antar bus data dan register berjalan optimal.'}`;
         }
-        if (q.includes('ulos') || q.includes('kearifan')) {
-          return `<strong>Filosofi Tenun Ulos & Arsitektur Komputer:</strong><br>Dalam tradisi masyarakat Sumatera Utara, sehelai <em>Ulos</em> tercipta dari jalinan benang lungsi (vertikal) dan pakan (horizontal) yang tidak boleh putus satu pun. Prinsip yang sama berlaku pada <code>Address Bus</code>, <code>Data Bus</code>, dan <code>Control Bus</code> dalam arsitektur Von Neumann—ketiganya harus sinkron agar eksekusi program berjalan utuh.`;
-        }
-        if (q.includes('cpmk') || q.includes('soal') || q.includes('evaluasi')) {
-          return `<strong>Evaluasi HOTS CPMK-03 (STMIK Methodist Binjai):</strong><br>Sebuah prosesor 5-stage pipeline berjalan pada frekuensi <code>${p1.toFixed(1)} GHz</code>. Jika 20% instruksi merupakan percabangan (<em>branch</em>) yang menimbulkan 2 siklus penalti, hitunglah CPI efektif prosesor tersebut! Tuliskan langkah analisis Anda.`;
+        if (q.includes('kearifan') || q.includes('ulos')) {
+          return `<strong>Filosofi Tenun Ulos & Arsitektur Von Neumann:</strong><br>Jalinan benang lungsi dan pakan pada <em>Ulos</em> mencerminkan keterikatan <code>Address Bus</code>, <code>Data Bus</code>, dan <code>Control Bus</code> yang harus bekerja serempak untuk menghasilkan eksekusi instruksi yang utuh.`;
         }
       }
-
       if (course === 'net') {
         if (q.includes('telemetri') || q.includes('analisis')) {
-          return `<strong>Analisis Trafik Jaringan (BW ${p1.toFixed(1)} Gbps | Load ${load}%):</strong><br>Utilisasi kanal saat ini berada pada level <strong>${load}%</strong>. ${load > 75 ? 'Terdeteksi peningkatan antrean buffer di Core Switch yang berpotensi memicu <em>TCP Congestion Avoidance</em>.' : 'Latensi propagasi paket berada dalam ambang optimal (< 5 ms).'}<br><br>Bagaimana mekanisme protokol TCP menyesuaikan ukuran <em>Congestion Window (cwnd)</em> saat beban melewati 80%?`;
+          return `<strong>Analisis Trafik Jaringan (BW ${p1.toFixed(1)} Gbps | Load ${load}%):</strong><br>Utilisasi kanal aktif <strong>${load}%</strong>. ${load > 75 ? 'Buffer antrean router distribusi mendekati ambang batas; aktifkan mekanisme QoS & Congestion Avoidance.' : 'Distribusi paket TCP/IP dari Core Switch menuju seluruh node klien berjalan stabil.'}`;
         }
-        if (q.includes('ulos') || q.includes('kearifan') || q.includes('siwaluh')) {
-          return `<strong>Arsitektur Komunal Siwaluh Jabu & Topologi Jaringan:</strong><br>Rumah adat Karo <em>Siwaluh Jabu</em> dirancang tanpa sekat kaku dengan delapan ruang fungsional yang saling terhubung pada satu struktur utama. Konsep ini merepresentasikan <strong>Fault-Tolerant Mesh Topology</strong> yang menjaga ketersediaan layanan jaringan kampus tetap stabil.`;
-        }
-        if (q.includes('cpmk') || q.includes('soal') || q.includes('evaluasi')) {
-          return `<strong>Evaluasi HOTS CPMK-04 (Jaringan Komputer):</strong><br>Jika salah satu link distribusi dari Core Switch terputus saat beban trafik <code>${load}%</code>, bandingkan waktu konvergensi antara protokol routing <strong>OSPF</strong> dan <strong>RIP</strong> dalam memulihkan jalur paket!`;
+        if (q.includes('kearifan') || q.includes('siwaluh')) {
+          return `<strong>Arsitektur Siwaluh Jabu & Topologi Jaringan:</strong><br>Rumah adat Karo <em>Siwaluh Jabu</em> menyatukan delapan ruang keluarga dalam satu struktur utama tanpa sekat kaku—selaras dengan prinsip <strong>Fault-Tolerant Mesh Topology</strong>.`;
         }
       }
-
       if (course === 'tree') {
         if (q.includes('telemetri') || q.includes('analisis')) {
-          return `<strong>Analisis Struktur BST 3D (7 Simpul | Tinggi h = 3):</strong><br>Dengan tinggi pohon <code>h = 3</code>, operasi pencarian, penyisipan, dan penghapusan data membutuhkan paling banyak 3 perbandingan kunci (<code>O(log₂ n)</code>).<br><br>Apa yang terjadi pada kompleksitas waktu pencarian jika data dimasukkan secara berurutan dari kecil ke besar tanpa penyeimbangan (<em>AVL/Red-Black</em>)?`;
+          return `<strong>Analisis Struktur BST 3D (7 Simpul | Tinggi h = 3):</strong><br>Pencarian kunci pada pohon seimbang ini hanya memerlukan maksimal 3 langkah perbandingan (<code>O(log₂ n)</code>).`;
         }
-        if (q.includes('ulos') || q.includes('kearifan') || q.includes('dalihan')) {
-          return `<strong>Dalihan Na Tolu & Keseimbangan Struktur Data:</strong><br>Falsafah <em>Dalihan Na Tolu</em> (Somba Marhula-hula, Elek Marboru, Manat Mardongan Tubu) menekankan keseimbangan peran tiga tungku agar tatanan sosial kokoh. Dalam struktur data, prinsip keseimbangan ini diwujudkan melalui <strong>Self-Balancing Tree (AVL Tree)</strong> agar tidak berat sebelah (<em>skewed</em>).`;
-        }
-        if (q.includes('cpmk') || q.includes('soal') || q.includes('evaluasi')) {
-          return `<strong>Evaluasi HOTS CPMK-02 (Struktur Data):</strong><br>Tuliskan urutan output kunjungan simpul pada model BST 3D di layar jika dilakukan penelusuran <strong>Post-Order Traversal (Left → Right → Root)</strong>!`;
+        if (q.includes('kearifan') || q.includes('dalihan')) {
+          return `<strong>Dalihan Na Tolu & Penyeimbangan Pohon Data:</strong><br>Falsafah keseimbangan tiga tungku <em>Dalihan Na Tolu</em> diwujudkan dalam algoritma <strong>Self-Balancing AVL Tree</strong> agar struktur data tidak miring (<em>skewed</em>).`;
         }
       }
-
-      return `Analisis yang tajam! Berdasarkan parameter praktikum aktif (<strong>Nilai = ${p1}</strong>, <strong>Beban = ${load}%</strong>), coba hubungkan hasil pengamatan visual 3D Anda dengan efisiensi algoritma atau arsitektur sistem. Apakah Anda ingin menguji rumus matematisnya atau lanjut ke soal evaluasi CPMK?`;
+      if (course === 'db') {
+        if (q.includes('telemetri') || q.includes('analisis')) {
+          return `<strong>Analisis Performa Basis Data (Buffer ${p1.toFixed(1)} GB | Load ${load}%):</strong><br>Rasio <em>Cache Hit</em> berada di kisaran <strong>${(99.4 - load * 0.04).toFixed(1)}%</strong> berkat struktur indeks B+ Tree yang meminimalkan pembacaan fisik ke disk.`;
+        }
+        if (q.includes('kearifan') || q.includes('pustaha')) {
+          return `<strong>Keteraturan Pustaha Laklak & Indeks Basis Data:</strong><br>Susunan lipatan terstruktur pada naskah <em>Pustaha Laklak</em> menganalogikan pengindeksan halaman data agar informasi dapat ditemukan secara cepat dan presisi.`;
+        }
+      }
+      return `Pengamatan yang sangat baik! Dengan parameter aktif (<strong>Nilai = ${p1}</strong>, <strong>Beban = ${load}%</strong>), coba uji pemahaman Anda pada tab <strong>Kuis HOTS CPMK</strong> atau catat hasil eksperimen pada tab <strong>Bukti Praktikum</strong>.`;
     }
 
     // =========================================================
-    // 6. NARASI AUDIO PRAKTIKUM & KEARIFAN LOKAL (WEB SPEECH)
+    // 6. EKSPOR BUKTI PRAKTIKUM & AUDIO NARASI
     // =========================================================
+    function downloadLabReport() {
+      const name = document.getElementById('mhs-name').value.trim() || 'Mahasiswa STMIK Methodist Binjai';
+      const npm = document.getElementById('mhs-npm').value.trim() || '-';
+      const notes = document.getElementById('mhs-notes').value.trim() || 'Simulasi 3D/AR dan evaluasi CPMK telah dilaksanakan.';
+      const courseTitle = document.getElementById('course-select').selectedOptions[0].text;
+      const p1 = document.getElementById('val-p1').textContent;
+      const p3 = document.getElementById('val-p3').textContent;
+
+      const content = [
+        "====================================================================",
+        "LEMBAR BUKTI PRAKTIKUM VIRTUAL (METHODIST-XR STUDIO PRO)",
+        "STMIK METHODIST BINJAI - SUMATERA UTARA",
+        "====================================================================",
+        `Nama Mahasiswa : ${name}`,
+        `NPM            : ${npm}`,
+        `Mata Kuliah    : ${courseTitle}`,
+        `Parameter Uji  : Utama = ${p1} | Beban Sistem = ${p3}`,
+        `Skor Kuis CPMK : ${totalScore} / 100`,
+        `Waktu Cetak    : ${new Date().toLocaleString('id-ID')}`,
+        "--------------------------------------------------------------------",
+        "KESIMPULAN EKSPERIMEN MAHASISWA:",
+        notes,
+        "===================================================================="
+      ].join("\n");
+
+      const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `Bukti_Praktikum_XR_${npm.replace(/\s+/g, '_')}.txt`;
+      a.click();
+      URL.revokeObjectURL(url);
+    }
+
     let speaking = false;
     function toggleAudioGuide() {
       const btn = document.getElementById('btn-voice');
       if (!('speechSynthesis' in window)) {
-        alert('Browser Anda tidak mendukung fitur Web Speech Audio.');
+        alert('Browser Anda belum mendukung fitur Web Speech Audio.');
         return;
       }
 
@@ -1140,9 +1647,10 @@
       }
 
       const narrations = {
-        arch: 'Selamat datang di Laboratorium Virtual STMIK Methodist Binjai. Pada modul Arsitektur Komputer ini, aliran sinyal antara Control Unit, ALU, dan Register dimodelkan selaras dengan keteraturan benang tenun Ulos Sumatera Utara.',
-        net: 'Modul Jaringan Komputer STMIK Methodist Binjai memvisualisasikan topologi hybrid yang terinspirasi dari struktur komunal rumah adat Karo Siwaluh Jabu, menjamin keandalan distribusi paket data.',
-        tree: 'Pada modul Struktur Data dan Algoritma, visualisasi Binary Search Tree tiga dimensi mengadopsi filosofi keseimbangan Dalihan Na Tolu untuk menjaga kompleksitas pencarian tetap efisien.'
+        arch: 'Selamat datang di Laboratorium Virtual STMIK Methodist Binjai. Pada modul Arsitektur Komputer ini, sinkronisasi Control Unit, ALU, dan Register dimodelkan selaras dengan keteraturan benang tenun Ulos Sumatera Utara.',
+        net: 'Modul Jaringan Komputer STMIK Methodist Binjai memvisualisasikan topologi hybrid yang terinspirasi dari struktur komunal rumah adat Karo Siwaluh Jabu.',
+        tree: 'Pada modul Struktur Data, visualisasi Binary Search Tree tiga dimensi mengadopsi filosofi keseimbangan Dalihan Na Tolu untuk menjaga efisiensi pencarian.',
+        db: 'Modul Sistem Basis Data memvisualisasikan struktur indeks B-Plus Tree yang terinspirasi dari keteraturan naskah Pustaha Laklak Sumatera Utara.'
       };
 
       const utter = new SpeechSynthesisUtterance(narrations[activeCourse]);
